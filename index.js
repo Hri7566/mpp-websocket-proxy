@@ -69,7 +69,7 @@ wss.on('connection', (ws, req) => {
             set: {
                 name: "Hri7566's NMPB"
             }
-        }])
+        }]);
     });
 
     cl.on('a', msg => {
