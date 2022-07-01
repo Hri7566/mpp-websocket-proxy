@@ -113,6 +113,8 @@ wss.on('connection', (ws, req) => {
             ws.send(JSON.stringify(msgs2));
         }
     });
+
+    let name = "๖ۣۜH͜r̬i͡7566's NMPB"
     
     cl.on('hi', msg => {
         // cl.sendArray([{
@@ -121,6 +123,13 @@ wss.on('connection', (ws, req) => {
         //         name: "Hri7566's NMPB"
         //     }
         // }]);
+
+        if (msg.u.name !== name) {
+            cl.sendArray([{
+                m: 'userset',
+                set: { name }
+            }])
+        }
     });
 
     cl.on('a', msg => {
