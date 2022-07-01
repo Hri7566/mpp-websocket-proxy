@@ -125,6 +125,8 @@ wss.on('connection', (ws, req) => {
         // }]);
 
         if (msg.u.name !== name) {
+            if (!name.endsWith(' [/help]'))
+            name += ' [/help]';
             cl.sendArray([{
                 m: 'userset',
                 set: { name }
