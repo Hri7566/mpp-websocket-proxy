@@ -151,6 +151,14 @@ wss.on('connection', (ws, req) => {
                 fs.writeFileSync('./banned_ids.json', JSON.stringify(banned_ids, undefined, 4));
                 cl.sendArray([{m: 'a', message: 'Banned ID ' + msg.a.substring(msg.a.split(' ')[0].length).trim()}]);
             }
+            if (msg.a.startsWith('!unban')) {
+                let i = banned_ids.indexOf(msg.a.substring(msg.a.split(' ')[0].length).trim())
+                if (i !== -1) {
+                    banned_ids.splice(i, 1);
+                    fs.writeFileSync('./banned_ids.json', JSON.stringify(banned_ids, undefined, 4));
+                    cl.sendArray([{m: 'a', message: 'Unbanned ID ' + msg.a.substring(msg.a.split(' ')[0].length).trim()}]);
+                }
+            }
         }
     });
 });
