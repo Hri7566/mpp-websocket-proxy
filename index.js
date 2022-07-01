@@ -91,7 +91,7 @@ wss.on('connection', (ws, req) => {
                                 return true;
                             });
                         }
-                        console.log(msg.ppl);
+                        // console.log(msg.ppl);
                     }
                 case 'a':
                     if (msg.m == 'a') {
