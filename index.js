@@ -123,16 +123,18 @@ wss.on('connection', (ws, req) => {
         //         name: "Hri7566's NMPB"
         //     }
         // }]);
+    });
 
-        if (msg.u.name !== name) {
-            if (!name.endsWith(' [/help]'))
-            name += ' [/help]';
+    setInterval(() => {
+        if (!name.endsWith(' [/help]'))
+        name += ' [/help]';
+        if (cl.getOwnParticipant().name !== name) {
             cl.sendArray([{
                 m: 'userset',
                 set: { name }
             }])
         }
-    });
+    }, 10 * 1000);
 
     cl.on('a', msg => {
         if (lock) {
