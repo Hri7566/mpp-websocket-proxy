@@ -45,7 +45,7 @@ wss.on('connection', (ws, req) => {
                                 msg.message = msg.message.replace('if he comes back', 'if they come back');
                             }
                             if (msg.message.startsWith('Welcome')) return;
-                            console.log(msg);
+                            // console.log(msg);
                         }
                     default:
                         // console.log(msg);
