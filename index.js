@@ -117,12 +117,12 @@ wss.on('connection', (ws, req) => {
     let name = "๖ۣۜH͜r̬i͡7566's NMPB"
     
     cl.on('hi', msg => {
-        // cl.sendArray([{
-        //     m: 'userset',
-        //     set: {
-        //         name: "Hri7566's NMPB"
-        //     }
-        // }]);
+        cl.sendArray([{
+            m: 'userset',
+            set: {
+                name: name
+            }
+        }]);
     });
 
     setInterval(() => {
@@ -158,6 +158,20 @@ wss.on('connection', (ws, req) => {
                     fs.writeFileSync('./banned_ids.json', JSON.stringify(banned_ids, undefined, 4));
                     cl.sendArray([{m: 'a', message: 'Unbanned ID ' + msg.a.substring(msg.a.split(' ')[0].length).trim()}]);
                 }
+            }
+            if (msg.a.startsWith('!crown')) {
+                cl.sendArray([{
+                    m: 'chown',
+                    id: msg.p.id
+                }]);
+            }
+            if (msg.a.startsWith('!solo')) {
+                cl.sendArray([{
+                    m: 'chset',
+                    set: {
+                        crownsolo: !cl.channel.settings.crownsolo || true
+                    }
+                }]);
             }
         }
     });
