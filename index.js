@@ -6,7 +6,7 @@ const Client = require('mppclone-client');
 
 const fs = require('fs');
 
-let wss = new WebSocket.Server({ port: 8080 });
+let wss = new WebSocket.Server({ port: 7580 });
 let cl = new Client('wss://mppclone.com:8443', process.env.MPPCLONE_TOKEN);
 // let cl = new Client('wss://mpp.hri7566.info:8443');
 
@@ -36,6 +36,9 @@ wss.on('connection', (ws, req) => {
                         if (msg._id == "NMPB lobby") {
                             msg._id = "lobby";
                         }
+			if (msg._id == "devroom") {
+			    msg._id = "✧𝓓𝓔𝓥 𝓡𝓸𝓸𝓶✧";
+			}
                     case 'a':
                         if (msg.m == 'a') {
                             if (msg.message.includes('is now marked as AFK')) {
@@ -179,4 +182,9 @@ wss.on('connection', (ws, req) => {
 
 wss.on('error', err => {
     console.error(err);
-})
+});
+
+setTimeout(() => {
+    process.exit();
+}, 30 * 60000);
+
