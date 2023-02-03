@@ -6,7 +6,7 @@ const Client = require('mppclone-client');
 
 const fs = require('fs');
 
-let wss = new WebSocket.Server({ port: 8080 });
+let wss = new WebSocket.Server({ port: 7580 });
 let cl = new Client('wss://mppclone.com:8443', process.env.MPPCLONE_TOKEN);
 // let cl = new Client('wss://mpp.hri7566.info:8443');
 
@@ -36,6 +36,9 @@ wss.on('connection', (ws, req) => {
                         if (msg._id == "NMPB lobby") {
                             msg._id = "lobby";
                         }
+			if (msg._id == "devroom") {
+			    msg._id = "✧𝓓𝓔𝓥 𝓡𝓸𝓸𝓶✧";
+			}
                     case 'a':
                         if (msg.m == 'a') {
                             if (msg.message.includes('is now marked as AFK')) {
@@ -44,7 +47,7 @@ wss.on('connection', (ws, req) => {
                             if (msg.message.includes('if he comes back')) {
                                 msg.message = msg.message.replace('if he comes back', 'if they come back');
                             }
-                            if (msg.message.includes('Welcome')) return;
+                            if (msg.message.startsWith('Welcome')) return;
                             // console.log(msg);
                         }
                     default:
@@ -100,13 +103,6 @@ wss.on('connection', (ws, req) => {
                         }
                         if (banned_ids.includes(msg.p._id)) {
                             break;
-                        }
-                        if (msg.a.startsWith('/about')) {
-                            cl.sendArray([{
-                                m: 'a',
-                                message: 'This is a modification of NMPB by Hri7566.'
-                            }]);
-                            return;
                         }
                     }
                 default:
@@ -176,32 +172,18 @@ wss.on('connection', (ws, req) => {
                 cl.sendArray([{
                     m: 'chset',
                     set: {
-                        crownsolo: !cl.channel.settings.crownsolo
+                        crownsolo: !cl.channel.settings.crownsolo || true
                     }
                 }]);
             }
-            if (msg.a.startsWith('!private') || msg.a.startsWith('!visible') || msg.a.startsWith('!hide')) {
-                cl.sendArray([{
-                    m: 'chset',
-                    set: {
-                        visible: !cl.channel.settings.visible
-                    }
-                }]);
-            }
-			if (msg.a.startsWith('!color') || msg.a.startsWith('!setcolor')) {
-				let args = msg.a.split(' ');
-				let argcat = msg.a.substring(args[0].length).trim();
-				cl.sendArray([{
-					m: 'userset',
-					set: {
-						color: argcat
-					}
-				}]);
-			}
         }
     });
 });
 
 wss.on('error', err => {
     console.error(err);
-})
+});
+
+setTimeout(() => {
+    process.exit();
+}, 30 * 60000);
