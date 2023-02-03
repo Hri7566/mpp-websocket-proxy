@@ -1,0 +1,6 @@
+WRN 2023-02-02T18:23:56.600 nvim.7257.0 vim_mktempdir:5214: tempdir create failed: read-only file system: /tmp/nvim.hri7566/XXXXXX
+ERR 2023-02-02T18:23:56.608 nvim.7257.0 vim_mktempdir:5202: tempdir root has invalid permissions (40777): ./nvim.hri7566
+WRN 2023-02-02T18:24:02.485 nvim.7429.0 vim_mktempdir:5214: tempdir create failed: read-only file system: /tmp/nvim.hri7566/XXXXXX
+ERR 2023-02-02T18:24:02.492 nvim.7429.0 vim_mktempdir:5202: tempdir root has invalid permissions (40777): ./nvim.hri7566
+WRN 2023-02-02T18:28:51.020 nvim.9549.0 vim_mktempdir:5214: tempdir create failed: read-only file system: /tmp/nvim.hri7566/XXXXXX
+ERR 2023-02-02T18:28:51.030 nvim.9549.0 vim_mktempdir:5202: tempdir root has invalid permissions (40777): ./nvim.hri7566

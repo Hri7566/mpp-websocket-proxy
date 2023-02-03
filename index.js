@@ -44,7 +44,7 @@ wss.on('connection', (ws, req) => {
                             if (msg.message.includes('if he comes back')) {
                                 msg.message = msg.message.replace('if he comes back', 'if they come back');
                             }
-                            if (msg.message.startsWith('Welcome')) return;
+                            if (msg.message.includes('Welcome')) return;
                             // console.log(msg);
                         }
                     default:
@@ -100,6 +100,13 @@ wss.on('connection', (ws, req) => {
                         }
                         if (banned_ids.includes(msg.p._id)) {
                             break;
+                        }
+                        if (msg.a.startsWith('/about')) {
+                            cl.sendArray([{
+                                m: 'a',
+                                message: 'This is a modification of NMPB by Hri7566.'
+                            }]);
+                            return;
                         }
                     }
                 default:
@@ -169,10 +176,28 @@ wss.on('connection', (ws, req) => {
                 cl.sendArray([{
                     m: 'chset',
                     set: {
-                        crownsolo: !cl.channel.settings.crownsolo || true
+                        crownsolo: !cl.channel.settings.crownsolo
                     }
                 }]);
             }
+            if (msg.a.startsWith('!private') || msg.a.startsWith('!visible') || msg.a.startsWith('!hide')) {
+                cl.sendArray([{
+                    m: 'chset',
+                    set: {
+                        visible: !cl.channel.settings.visible
+                    }
+                }]);
+            }
+			if (msg.a.startsWith('!color') || msg.a.startsWith('!setcolor')) {
+				let args = msg.a.split(' ');
+				let argcat = msg.a.substring(args[0].length).trim();
+				cl.sendArray([{
+					m: 'userset',
+					set: {
+						color: argcat
+					}
+				}]);
+			}
         }
     });
 });
